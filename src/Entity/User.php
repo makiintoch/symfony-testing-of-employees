@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="app_users")
@@ -16,22 +17,41 @@ class User implements UserInterface, \Serializable
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="string", unique=true)
+     * @Assert\NotBlank()
      */
-    private $username;
+    protected $username;
 
     /**
      * @ORM\Column(type="string", unique=true)
+     * @Assert\NotBlank()
+     * @Assert\Email()
      */
-    private $email;
+    protected $email;
 
     /**
-     * @ORM\Column(type="string")
+     * @Assert\NotBlank()
+     * @Assert\Length(max=4096)
      */
-    private $password;
+    protected $plainPassword;
+
+    /**
+     * @ORM\Column(type="string", length=64)
+     */
+    protected $password;
+
+    /**
+     * @ORM\Column(type="array")
+     */
+    protected $roles;
+
+    public function __construct()
+    {
+        $this->roles = ['ROLE_USER'];
+    }
 
     public function getId()
     {
@@ -39,15 +59,15 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getUsername()
+    public function getUsername(): string
     {
         return $this->username;
     }
 
     /**
-     * @param mixed $username
+     * @param $username
      */
     public function setUsername($username): void
     {
@@ -55,19 +75,35 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getEmail()
+    public function getEmail(): string
     {
         return $this->email;
     }
 
     /**
-     * @param mixed $email
+     * @param $email
      */
     public function setEmail($email): void
     {
         $this->email = $email;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPlainPassword(): string
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * @param $plainPassword
+     */
+    public function setPlainPassword($password): void
+    {
+        $this->plainPassword = $password;
     }
 
     /**
@@ -79,18 +115,24 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * @param mixed $password
+     * @param $password
      */
     public function setPassword($password): void
     {
         $this->password = $password;
     }
 
-    public function getRoles()
+    /**
+     * @return array
+     */
+    public function getRoles(): array
     {
-        return array('ROLE_USER');
+        return $this->roles;
     }
 
+    /**
+     * @return null
+     */
     public function getSalt()
     {
         return null;
@@ -120,6 +162,4 @@ class User implements UserInterface, \Serializable
             $this->password,
             ) = unserialize($serialized, ['allowed_classes' => false]);
     }
-
-
 }
