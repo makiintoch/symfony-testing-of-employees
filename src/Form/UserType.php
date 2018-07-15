@@ -2,14 +2,14 @@
 
 namespace App\Form;
 
-use function PHPSTORM_META\type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\{
-    PasswordType, RepeatedType, TextType, EmailType
+    CheckboxType, PasswordType, RepeatedType, TextType, EmailType
 };
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use App\Entity\User;
+use Symfony\Component\Validator\Constraints\IsTrue;
 
 class UserType extends AbstractType
 {
@@ -22,6 +22,10 @@ class UserType extends AbstractType
                 'type' => PasswordType::class,
                 'first_options' => ['label' => 'Password'],
                 'second_options' => ['label' => 'Repeat password'],
+            ])
+            ->add('termsAccepted', CheckboxType::class, [
+                'mapped' => false,
+                'constraints' => new IsTrue()
             ])
         ;
     }
