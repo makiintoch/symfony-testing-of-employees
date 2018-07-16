@@ -15,8 +15,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        $categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
+
         return $this->render('category/index.html.twig', [
-            'controller_name' => 'CategoryController',
+            'categories' => $categories ,
         ]);
     }
 
