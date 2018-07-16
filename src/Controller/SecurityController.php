@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-class RegistrationController extends Controller
+class SecurityController extends Controller
 {
     /**
      * @Route("/registration", name="user_registration")
@@ -32,7 +32,7 @@ class RegistrationController extends Controller
             return $this->redirectToRoute('home');
         }
 
-        return $this->render('registration/register.html.twig', [
+        return $this->render('security/register.html.twig', [
             'form' => $form->createView(),
         ]);
     }
