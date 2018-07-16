@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -25,6 +26,21 @@ class Category
      * @ORM\Column(type="text")
      */
     private $description;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Test", mappedBy="category")
+     */
+    private $tests;
+
+    public function __construct()
+    {
+        $this->tests = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
 
     public function getId()
     {
@@ -65,5 +81,13 @@ class Category
     {
         $this->description = $description;
         return $this;
+    }
+
+    /**
+     * @return ArrayCollection|Test[]
+     */
+    public function getTests(): ArrayCollection
+    {
+        return $this->tests;
     }
 }

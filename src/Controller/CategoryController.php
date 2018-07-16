@@ -23,6 +23,8 @@ class CategoryController extends Controller
     }
 
     /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      * @Route("/category/create", name="category_create")
      */
     public function create(Request $request)
