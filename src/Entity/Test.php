@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\TestRepository")
  */
-class Category
+class Test
 {
     /**
      * @ORM\Id()
@@ -31,18 +31,11 @@ class Category
         return $this->id;
     }
 
-    /**
-     * @return null|string
-     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
-    /**
-     * @param string $name
-     * @return Category
-     */
     public function setName(string $name): self
     {
         $this->name = $name;
@@ -59,7 +52,7 @@ class Category
 
     /**
      * @param $description
-     * @return Category
+     * @return Test
      */
     public function setDescription($description): self
     {
