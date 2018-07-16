@@ -17,36 +17,36 @@ class User implements UserInterface, \Serializable
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    protected $id;
+    private $id;
 
     /**
      * @ORM\Column(type="string", unique=true)
      * @Assert\NotBlank()
      */
-    protected $username;
+    private $username;
 
     /**
      * @ORM\Column(type="string", unique=true)
      * @Assert\NotBlank()
      * @Assert\Email()
      */
-    protected $email;
+    private $email;
 
     /**
      * @Assert\NotBlank()
      * @Assert\Length(max=4096)
      */
-    protected $plainPassword;
+    private $plainPassword;
 
     /**
      * @ORM\Column(type="string", length=64)
      */
-    protected $password;
+    private $password;
 
     /**
      * @ORM\Column(type="array")
      */
-    protected $roles;
+    private $roles;
 
     public function __construct()
     {
@@ -59,7 +59,7 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * @return string
+     * @return null|string
      */
     public function getUsername(): ?string
     {
@@ -68,14 +68,16 @@ class User implements UserInterface, \Serializable
 
     /**
      * @param $username
+     * @return User
      */
-    public function setUsername($username): void
+    public function setUsername($username): self
     {
         $this->username = $username;
+        return $this;
     }
 
     /**
-     * @return string
+     * @return null|string
      */
     public function getEmail(): ?string
     {
@@ -84,14 +86,16 @@ class User implements UserInterface, \Serializable
 
     /**
      * @param $email
+     * @return User
      */
-    public function setEmail($email): void
+    public function setEmail($email): self
     {
         $this->email = $email;
+        return $this;
     }
 
     /**
-     * @return string
+     * @return null|string
      */
     public function getPlainPassword(): ?string
     {
@@ -99,11 +103,13 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * @param $plainPassword
+     * @param $password
+     * @return User
      */
-    public function setPlainPassword($password): void
+    public function setPlainPassword($password): self
     {
         $this->plainPassword = $password;
+        return $this;
     }
 
     /**
@@ -116,10 +122,12 @@ class User implements UserInterface, \Serializable
 
     /**
      * @param $password
+     * @return User
      */
-    public function setPassword($password): void
+    public function setPassword($password): self
     {
         $this->password = $password;
+        return $this;
     }
 
     /**
