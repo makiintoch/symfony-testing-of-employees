@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class CategoryController extends Controller
 {
     /**
+     * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/category", name="category")
      */
     public function index()
