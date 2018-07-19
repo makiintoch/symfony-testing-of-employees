@@ -6,8 +6,64 @@
     <div class="container">
         {{ form_start(form) }}
             {{ form_row(form.name) }}
+            {{ form_row(form.answers) }}
 
             <button class="btn btn-primary" type="submit">Create</button>
         {{ form_end(form) }}
     </div>
+
+    <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
+
+    <script>
+        var $collectionHolder;
+
+        // установка ссылки "добавить тег"
+        var $addAnswerLink = $('<a href="#" class="add_answer_link">Add an answer</a>');
+        var $newLinkLi = $('<div></div>').append($addAnswerLink);
+
+        jQuery(document).ready(function() {
+            // Получите ul, содержащий коллекцию тегов
+            $collectionHolder = $('#question_answers');
+
+            // добавьте привязку "добавить тег" и li к тегам ul
+            $collectionHolder.append($newLinkLi);
+
+            // почитайте текущие вводы формы, которые у вас есть (например, 2) и используйте
+            // это в качестве нового индекса при вставке нового объекта (например, 2)
+            $collectionHolder.data('index', $collectionHolder.find(':input').length);
+
+            $addAnswerLink.on('click', function(e) {
+                // предотвратите ссылку от создания "#" в URL
+                e.preventDefault();
+
+                // добавьте новую форму тега (смотрите следующий блок кода)
+                addAnswerForm($collectionHolder, $newLinkLi);
+            });
+        });
+
+        function addAnswerForm($collectionHolder, $newLinkLi) {
+            // Получить прототип данных, объяснённый ранее
+            var prototype = $collectionHolder.data('prototype');
+
+            // получить новый индекс
+            var index = $collectionHolder.data('index');
+
+            var newForm = prototype;
+            // Вам нужно это только в случае, если вы не установили 'label', как "false" в вашем поле тегов в QuestionType
+            // Заменить '__name__label__' в HTML прототипа, чтобы
+            // он был числом, основанным на том, сколько объектов у нас есть
+            // newForm = newForm.replace(/__name__label__/g, index);
+
+            // Заменить '__name__' в HTML прототипа на
+            // номер, основанный на количестве имеющихся объектов
+            newForm = newForm.replace(/__name__/g, index);
+
+            // увеличить индекс на единицу для следующего объекта
+            $collectionHolder.data('index', index + 1);
+
+            // Отобразить форму на странице в li, до ссылки Li "добавить тег"
+            var $newFormLi = $('<div></div>').append(newForm);
+            $newLinkLi.before($newFormLi);
+        }
+    </script>
 {% endblock %}

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -24,10 +25,14 @@ class Question
     private $name;
 
     /**
-     * @Assert\Type(type="App\Entity\Answer")
-     * @Assert\Valid()
+     * @ORM\OneToMany(targetEntity="App\Entity\Answer", mappedBy="question", cascade={"persist"})
      */
-    private $answer;
+    private $answers;
+
+    public function __construct()
+    {
+        $this->answers = new ArrayCollection();
+    }
 
     /**
      * @return int
@@ -56,20 +61,27 @@ class Question
     }
 
     /**
-     * @return mixed
+     * @return ArrayCollection
      */
-    public function getAnswer()
+    public function getAnswers(): ArrayCollection
     {
-        return $this->answer;
+        return $this->answers;
     }
 
     /**
-     * @param Answer|null $answer
-     * @return Question
+     * @param Answer $answer
      */
-    public function setAnswer(Answer $answer = null): self
+    public function addAnswer(Answer $answer): void
     {
-        $this->answer = $answer;
-        return $this;
+        $answer->addAnswer($this);
+        $this->answers->add($answer);
+    }
+
+    /**
+     * @param Answer $answer
+     */
+    public function removeAnswer(Answer $answer): void
+    {
+        $this->answers->removeElement($answer);
     }
 }
