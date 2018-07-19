@@ -72,12 +72,4 @@ class Answer
         $this->question = $question;
         return $this;
     }
-
-    /**
-     * @param Question $question
-     */
-    public function addAnswer(Question $question): void
-    {
-        $this->question = $question;
-    }
 }

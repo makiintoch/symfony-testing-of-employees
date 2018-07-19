@@ -73,7 +73,7 @@ class Question
      */
     public function addAnswer(Answer $answer): void
     {
-        $answer->addAnswer($this);
+        $answer->setQuestion($this);
         $this->answers->add($answer);
     }
 
