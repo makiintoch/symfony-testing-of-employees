@@ -11,7 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class TestController extends Controller
 {
     /**
-     * @Route("/test", name="test")
+     * @Route("/admin/test", name="test")
      */
     public function index()
     {
@@ -23,7 +23,7 @@ class TestController extends Controller
     /**
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     * @Route("/test/create", name="test_create")
+     * @Route("/admin/test/create", name="test_create")
      */
     public function create(Request $request)
     {

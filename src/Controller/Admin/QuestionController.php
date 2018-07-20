@@ -12,7 +12,7 @@ class QuestionController extends Controller
 {
     /**
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/question", name="question")
+     * @Route("/admin/question", name="question")
      */
     public function index()
     {
@@ -26,7 +26,7 @@ class QuestionController extends Controller
     /**
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/question/create", name="question_create")
+     * @Route("/admin/question/create", name="question_create")
      */
     public function create(Request $request)
     {

@@ -12,7 +12,7 @@ class CategoryController extends Controller
 {
     /**
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/category", name="category")
+     * @Route("/admin/category", name="category")
      */
     public function index()
     {
@@ -26,7 +26,7 @@ class CategoryController extends Controller
     /**
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     * @Route("/category/create", name="category_create")
+     * @Route("/admin/category/create", name="category_create")
      */
     public function create(Request $request)
     {
