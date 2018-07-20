@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Question;
 use App\Form\QuestionType;
@@ -18,7 +18,7 @@ class QuestionController extends Controller
     {
         $questions = $this->getDoctrine()->getRepository(Question::class)->findAll();
 
-        return $this->render('question/index.html.twig', [
+        return $this->render('admin/question/index.html.twig', [
             'questions' => $questions,
         ]);
     }
@@ -43,7 +43,7 @@ class QuestionController extends Controller
             return $this->redirectToRoute('question');
         }
 
-        return $this->render('question/create.html.twig', [
+        return $this->render('admin/question/create.html.twig', [
             'form' => $form->createView(),
         ]);
     }

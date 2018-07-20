@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Test;
 use App\Form\TestType;
@@ -16,7 +16,7 @@ class TestController extends Controller
     public function index()
     {
         return $this->render('test/index.html.twig', [
-            'controller_name' => 'TestController',
+
         ]);
     }
 
@@ -40,7 +40,7 @@ class TestController extends Controller
             return $this->redirectToRoute('test');
         }
 
-        return $this->render('test/create.html.twig',[
+        return $this->render('admin/test/create.html.twig',[
             'form' => $form->createView(),
         ]);
     }

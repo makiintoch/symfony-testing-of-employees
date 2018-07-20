@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Category;
 use App\Form\CategoryType;
@@ -18,7 +18,7 @@ class CategoryController extends Controller
     {
         $categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
 
-        return $this->render('category/index.html.twig', [
+        return $this->render('admin/category/index.html.twig', [
             'categories' => $categories ,
         ]);
     }
@@ -43,7 +43,7 @@ class CategoryController extends Controller
             return $this->redirectToRoute('category');
         }
 
-        return $this->render('category/create.html.twig',[
+        return $this->render('admin/category/create.html.twig',[
             'form' => $form->createView(),
         ]);
     }
